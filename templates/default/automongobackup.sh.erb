@@ -82,10 +82,20 @@ CLEANUP=<%= @node[:mongodb][:server][:backup][:cleanup] %>
 LATEST=<%= @node[:mongodb][:server][:backup][:latest] %>
 
 # Command to run before backups (uncomment to use)
+
+<% if @node[:mongodb][:server][:backup][:prebackup] %>
+PREBACKUP="<%= node[:mongodb][:server][:backup][:prebackup] %>"
+<% else %>
 #PREBACKUP="/etc/mysql-backup-pre"
+<% end %>
+
 
 # Command run after backups (uncomment to use)
+<% if @node[:mongodb][:server][:backup][:postbackup] %>
+POSTBACKUP="<%= node[:mongodb][:server][:backup][:postbackup] %>"
+<% else %>
 #POSTBACKUP="/etc/mysql-backup-post"
+<% end %>
 
 #=====================================================================
 # Options documentation
